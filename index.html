@@ -1,0 +1,254 @@
+<html>
+  <head>
+    <title>Dyson Sphere Program Dependency Graph</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79649328-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-79649328-1');
+    </script>
+  </head>
+  <body>
+    <section style="position:absolute; background: #ffffff80;">
+      <h1>Dyson Sphere Program Dependency Graph</h1>
+      <details>
+        <summary>
+          <b>Details</b>
+        </summary>
+        <p>
+          This page renders a WIP dependency graph for resources and buildings in
+          the game
+          <a href="https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/">Dyson Sphere Program</a>.
+        </p>
+        <p>
+          This was build using <a href="https://github.com/mdaines/viz.js">viz.js</a>
+          which is a <a href="http://www.graphviz.org/">Graphviz</a> Javascript port using
+          <a href="http://kripken.github.io/emscripten-site/">Emscripten</a>. The panning
+          and zooming is supported by
+          <a href="https://github.com/bumbu/svg-pan-zoom">svg-pan-zoom</a>.
+        </p>
+        <p>
+          ATM this is not very legible and probably needs some form of
+          filtering, or hover-highlighting to improve the UX.
+        </p>
+      </details>
+    </section>
+    <script id="raw_graphviz" type="text/plain">
+digraph G {
+
+  // tier 1
+  iron_ore -> iron_ingot;
+  copper_ore -> copper_ingot;
+  silicon_ore -> high_purity_silicon;
+  titanium_ore -> titanium_ingot;
+  stone -> stone_brick;
+  coal -> energetic_graphite;
+  crude_oil -> plasma_refining -> {refined_oil, hydrogen};
+  {refined_oil, energetic_graphite} -> plastic;
+  {energetic_graphite, sulfuric_acid} -> make_graphene_1 -> graphene;
+
+  // tier 2
+  iron_ore -> magnet;
+  {magnet, copper_ingot} -> magnetic_coil
+  high_purity_silicon -> make_crystal_silicon_1 -> crystal_silicon;
+  {steel, titanium_ingot, sulfuric_acid} -> titanium_alloy;
+  stone -> glass;
+  energetic_graphite -> make_diamond_1 -> diamond;
+  {hydrogen, refined_oil} -> xray_cracking -> {hydrogen, energetic_graphite};
+  {water, refined_oil, plastic} -> make_organic_crystal_1 -> organic_crystal;
+  fire_ice -> ice_collect -> {hydrogen, graphene}
+  {titanium_ingot, hydrogen} -> hydrogen_fuel_rod;
+  {titanium_alloy, deuterium, super_magnetic_ring} -> deuteron_fuel_rod;
+
+  // tier 3
+  iron_ingot -> steel;
+  {iron_ingot, gear, magnetic_coil} -> electric_motor;
+  fractal_silicon -> make_crystal_silicon_2 -> crystal_silicon;
+  {glass, titanium_ingot, water} -> titanium_glass;
+  glass -> prism;
+  kimberlite_ore -> make_diamond_2 -> diamond;
+  hydrogen -> deuterium;
+  // filtered since not often used
+  // {log, plant_fuel, water} -> make_organic_crystal_2 -> organic_crystal;
+  {titanium_ingot, organic_crystal} -> titanium_crystal;
+  {steel, copper_ingot} -> thruster;
+  {titanium_alloy, electromagnetic_turbine} -> reinforced_thruster;
+  {particle_container, iron_ingot, deuterium} -> strange_matter;
+
+  // tier 4
+  iron_ingot -> gear;
+  {magnetic_coil, electric_motor} -> electromagnetic_turbine;
+  stone -> silicon_ore;
+  {iron_ingot, copper_ingot} -> circuit_board;
+  {diamond, strange_matter} -> graviton_lens;
+  {refined_oil, stone, water} -> sulfuric_acid;
+  // filtered, forget why
+  // hydrogen -> deuterium;
+  {casimir_crystal, titanium_glass} -> plane_filter
+  {titanium_ingot, graphene} -> make_carbon_nanotube_1 -> carbon_nanotube;
+  {iron_ingot, processor, thruster} -> logistics_drone;
+  {titanium_alloy, processor, reinforced_thruster} -> logistics_vessel;
+
+  // tier 5
+  {magnetic_coil, prism} -> plasma_exciter;
+  {magnet, energetic_graphite, electromagnetic_turbine} -> super_magnetic_ring;
+  {carbon_nanotube, crystal_silicon, plastic} -> particle_broadband;
+  {circuit_board, microcrystalline_component} -> processor;
+  {titanium_crystal, graphene, hydrogen} -> make_cc1 -> casimir_crystal;
+  {copper_ingot, graphene, electromagnetic_turbine} -> make_pc_1 -> particle_container;
+  graviton_lens -> make_sw1 -> space_warper;
+  spiniform_stalagmite_crystale -> make_carbon_nanotube_2 -> carbon_nanotube;
+  {graphene, photon_combiner} -> solar_sail;
+  {carbon_nanotube, titanium_alloy, high_purity_silicon} -> frame_material;
+  {frame_material, solar_sail, processor} -> dyson_sphere_component;
+  // incomplete
+
+  // tier 6
+  {prism, circuit_board} -> make_photoncombiner_1 -> photon_combiner;
+  {optical_grating_crystal, circuit_board} -> make_photoncombiner_2 -> photon_combiner;
+  {high_purity_silicon, copper_ingot} -> microcrystalline_component;
+  {processor, plane_filter} -> quantum_chip;
+  {optical_grating_crystal, graphene, hydrogen} -> make_cc2 -> casimir_crystal;
+  {copper_ingot, unipolar_magnet} -> make_pc_2 -> particle_container;
+  green_cube -> make_sw2 -> space_warper;
+
+  // tier 7
+  {magnetic_coil, circuit_board} -> blue_cube;
+  {energetic_graphite, hydrogen} -> red_cube;
+  {titanium_crystal, diamond} -> yellow_cube;
+  {processor, particle_broadband} -> purple_cube;
+  {graviton_lens, quantum_chip} -> green_cube;
+  {stone_brick, steel} -> foundation;
+
+  // Layer 1
+  {
+      rank = same;
+      iron_ore;
+      stone;
+      copper_ore;
+      silicon_ore;
+      titanium_ore;
+      coal;
+      fire_ice;
+      crude_oil;
+      water;
+      fractal_silicon;
+      unipolar_magnet;
+
+  }
+  // Layer 2
+  {
+      rank = same;
+      iron_ingot;
+      copper_ingot;
+      high_purity_silicon;
+      titanium_ingot;
+      stone_brick;
+      magnet;
+      glass;
+      energetic_graphite;
+  }
+  // Layer 3
+  {
+      rank = same;
+      magnetic_coil;
+      crystal_silicon;
+      steel;
+      gear;
+      prism;
+      circuit_board;
+      microcrystalline_component;
+  }
+
+  // Layer 10 - finished goods only
+//   {
+//       rank = same;
+//       blue_cube;
+//       red_cube;
+//       yellow_cube;
+//       purple_cube;
+//   }
+
+  // Produced
+  // iron_ore, copper_ore, stone [color = green];
+  // iron_ingot, copper_ingot, magnet, glass [color = green];
+  // circuit_board [color = green];
+  // magnetic_coil [color = green];
+  // prism, gear [color = green];
+  // make_photoncombiner_1, photon_combiner [color = green];
+  // electric_motor [color = green];
+  // electromagnetic_turbine [color = green];
+  // silicon_ore, high_purity_silicon, microcrystalline_component, processor [color = green];
+  // super_magnetic_ring [color = green];
+  // steel, titanium_alloy [color = green];
+  // titanium_ore, titanium_ingot [color = green];
+  // hydrogen, fire_ice [color = green];
+  // blue_cube, red_cube [color = green];
+  // coal, sulfuric_acid, water, plastic, energetic_graphite [color = green];
+  // make_diamond_1, diamond [color = green];
+  // make_organic_crystal_1, organic_crystal [color = green];
+  // titanium_crystal, yellow_cube [color = green];
+  // make_crystal_silicon_1, crystal_silicon [color = green];
+  // ice_collect, graphene [color = green];
+  // make_carbon_nanotube_1, carbon_nanotube [color = green];
+  // particle_broadband [color = green];
+  // purple_cube [color = green];
+  // crude_oil, plasma_refining, refined_oil [color = green];
+  // deuterium [color = green];
+  // deuteron_fuel_rod [color = green];
+  // make_pc_1, particle_container [color = green];
+  // solar_sail, frame_material, dyson_sphere_component [color = green];
+  // strange_matter, graviton_lens [color = green];
+  // titanium_glass [color = green];
+  // make_cc1, casimir_crystal [color = green];
+  // plane_filter, quantum_chip, green_cube [color = green];
+  // make_sw1, space_warper [color = green];
+
+  // Rare
+  unipolar_magnet, make_pc_2 [color = purple];
+  kimberlite_ore, make_diamond_2 [color = purple];
+  optical_grating_crystal, make_photoncombiner_2 [color = purple];
+  fractal_silicon, make_crystal_silicon_2 [color = purple];
+  spiniform_stalagmite_crystale, make_carbon_nanotube_2 [color = purple];
+  make_cc2 [color = purple];
+
+  // junk, not worth graphing
+  // log, plant_fuel, make_organic_crystal_2 [color = grey];
+}
+    </script>
+    <script src="viz.js"></script>
+    <script src="full.render.js"></script>
+    <script src="svg-pan-zoom.min.js"></script>
+    <script>
+      var viz = new Viz();
+    
+      const content = document.getElementById('raw_graphviz').innerText;
+      viz.renderSVGElement(content)
+      .then(function(element) {
+        document.body.appendChild(element);
+        const panOptions = {
+          panEnabled: true,
+          controlIconsEnabled: true,
+          zoomScaleSensitivity: 0.4,
+          zoomEnabled: true,
+          minZoom: 0.3,
+          fit: true,
+          center: true,
+        };
+        svgPanZoom(document.getElementsByTagName('svg')[0], panOptions);
+      })
+      .catch(error => {
+        // Create a new Viz instance (@see Caveats page for more info)
+        viz = new Viz();
+    
+        // Possibly display the error
+        console.error(error);
+      });
+
+    </script>
+  </body>
+</html>
