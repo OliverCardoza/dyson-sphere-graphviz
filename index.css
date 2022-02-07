@@ -1,0 +1,25 @@
+body {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  padding: 16px;
+}
+
+section#intro {
+  flex: 0 0 300px;
+  border-right: 1px solid black;
+}
+
+section#svg {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#output {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
