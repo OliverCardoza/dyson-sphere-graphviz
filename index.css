@@ -1,6 +1,21 @@
+html {
+  font-size: 12px;
+}
+
 body {
   display: flex;
+  flex-direction: column;
   margin: 0;
+  padding: 0;
+  max-height: 100%;
+  max-width: unset;
+}
+
+main {
+  display: flex;
+  flex: 1 1 auto;
+  grid-column: unset;
+  min-height: 0;
   padding: 0;
 }
 
@@ -8,12 +23,13 @@ section {
   padding: 16px;
 }
 
-section#intro {
-  flex: 0 0 300px;
+#intro {
+  flex: 0 0 360px;
   border-right: 1px solid black;
 }
 
-section#svg {
+#svg {
+  background: white;
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -22,4 +38,61 @@ section#svg {
   height: 100%;
   overflow: hidden;
   width: 100%;
+}
+
+/**
+ * Footer
+ */
+body > footer {
+  text-align: center;
+  /* Custom for dyson-sphere-graphviz */
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-link {
+  display: inline-block;
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 10px;
+  text-align: center;
+  width: 200px;
+}
+
+.icon>svg, .icon>img {
+  display: inline-block;
+  height: 16px;
+  vertical-align: middle;
+  width: 16px;
+}
+
+/**
+ * Github Corner Banner
+ * Source: http://tholman.com/github-corners/
+ */
+
+.github-corner:hover .octo-arm{
+  animation:octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave{
+  0%,100% {
+    transform:rotate(0);
+  }
+  20%,60% {
+    transform:rotate(-25deg);
+  }
+  40%,80% {
+    transform:rotate(10deg);
+  }
+}
+
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm{
+    animation: octocat-wave 560ms ease-in-out;
+  }
 }
