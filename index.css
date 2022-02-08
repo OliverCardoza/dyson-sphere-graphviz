@@ -43,7 +43,7 @@ section {
 /**
  * Footer
  */
-body > footer {
+section > footer {
   text-align: center;
   /* Custom for dyson-sphere-graphviz */
   flex: 0 0 auto;
