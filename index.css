@@ -26,6 +26,7 @@ section {
 #intro {
   flex: 0 0 360px;
   border-right: 1px solid black;
+  overflow-y: scroll;
 }
 
 #svg {
