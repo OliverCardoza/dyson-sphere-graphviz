@@ -23,8 +23,8 @@
             <b>Details</b>
           </summary>
           <p>
-            This page renders a WIP dependency graph for resources and buildings in
-            the game
+            This page renders a dependency graph for the complete set of
+            resources and buildings in the game
             <a href="https://store.steampowered.com/app/1366540/Dyson_Sphere_Program/">Dyson Sphere Program</a>.
           </p>
           <p>
@@ -57,11 +57,11 @@
             If a node gets past all filters it will make adjacent nodes visible too.
           </p>
           <p>
-            A number of #tags can also be used including #raw, #rare, #junk, #logistics, #t1, #t2, #t3, #t4, #t5, #t6
+            A number of #tags can also be used including #raw, #rare, #junk, #logistics, #building, #t1 - #t7, #bt1 - #bt4
           </p>
           <p>
             <label for="filter_out">Filter:</label>
-            <input type="text" id="filter_out" value="#junk|#rare|#raw" />
+            <input type="text" id="filter_out" value="#junk|#rare|#raw|#building" />
           </p>
           <p>
             <label for="filter_in">Select:</label>
@@ -201,7 +201,62 @@
   // Raw, non-rare
   iron_ore, copper_ore, stone, coal, silicon_ore, titanium_ore, water, crude_oil [color = green]; // #raw
   log, plant_fuel [color = green]; // #raw, #junk
-  
+
+  // Make buildings in t1
+  {iron_ingot, magnetic_coil} -> tesla_tower; // #building #bt1
+  {tesla_tower, plasma_exciter} -> wireless_power_tower; // #building #bt1
+  {wireless_power_tower, super_magnetic_ring, frame_material} -> satellite_substation; // #building #bt1
+  {iron_ingot, gear, magnetic_coil} -> wind_turbine; // #building #bt1
+  {iron_ingot, stone_brick, gear, magnetic_coil} -> thermal_power_plant; // #building #bt1
+  {copper_ingot, high_purity_silicon, circuit_board} -> solar_panel; // #building #bt1
+  {steel, copper_ingot, photon_combiner, super_magnetic_ring} -> geothermal_power_station; // #building #bt1
+  {titanium_alloy, steel, processor, particle_container} -> energy_exchanger; // #building #bt1
+  {steel, high_purity_silicon, photon_combiner, processor, super_magnetic_ring} -> ray_receiver; // #building #bt1
+  {titanium_alloy, frame_material, annihilation_constraint_sphere, quantum_chip} -> artificial_star; // #building #bt1
+  tesla_tower, wireless_power_tower, satellite_substation, wind_turbine, thermal_power_plant, solar_panel, geothermal_power_station, energy_exchanger, ray_receiver, artificial_star [color = blue]; // #building #bt1
+
+  // Make buildings in t2
+  {iron_ingot, gear} -> conveyor_belt_mk1; // #building #bt2
+  {conveyor_belt_mk1, electromagnetic_turbine} -> conveyor_belt_mk2; // #building #bt2
+  {conveyor_belt_mk2, super_magnetic_ring, graphene} -> conveyor_belt_mk3; // #building #bt2
+  {iron_ingot, gear, circuit_board} -> splitter; // #building #bt2
+  {steel, gear, super_magnetic_coil, processor} -> automatic_piler; // #building #bt2
+  {iron_ingot, gear, glass, circuit_board} -> traffic_monitor; // #building #bt2
+  {iron_ingot, stone_brick} -> storage_mk1; // #building #bt2
+  {steel, stone_brick} -> storage_mk2; // #building #bt2
+  {iron_ingot, stone_brick, glass} -> storage_tank; // #building #bt2
+  {steel, titanium_ingot, processor, particle_container} -> planetary_logistics_station; // #building #bt2
+  {planetary_logistics_station, titanium_alloy, particle_container} -> interstellar_logistics_station; // #building #bt2
+  {interstellar_logistics_station, super_magnetic_coil, reinforced_thruster, accumulator} -> orbital_collector; // #building #bt2
+  conveyor_belt_mk1, conveyor_belt_mk2, conveyor_belt_mk3, splitter, automatic_piler, traffic_monitor, storage_mk1, storage_mk2, storage_tank, planetary_logistics_station, interstellar_logistics_station, orbital_collector [color = blue]; // #building #bt2
+
+  // Make buildings in t3
+  {iron_ingot, circuit_board} -> sorter_mk1; // #building #bt3
+  {sorter_mk1, electric_motor} -> sorter_mk2; // #building #bt3
+  {sorter_mk2, electromagnetic_turbine} -> sorter_mk3; // #building #bt3
+  {iron_ingot, circuit_board, magnetic_coil, gear} -> mining_machine; // #building #bt3
+  {titanium_alloy, frame_material, super_magnetic_ring, quantum_chip, optical_grating_crystal} -> advanced_mining_machine; // #building #bt3
+  {iron_ingot, stone_brick, electric_motor, circuit_board} -> water_pump; // #building #bt3
+  {steel, stone_brick, circuit_board, plasma_exciter} -> oil_extractor; // #building #bt3
+  {steel, stone_brick, circuit_board, plasma_exciter} -> oil_refinery; // #building #bt3
+  {titanium_alloy, frame_material, super_magnetic_ring, graphene, processor} -> miniature_particle_collider; // #building #bt3
+  {steel, gear, processor, super_magnetic_ring} -> em_rail_ejector; // #building #bt3
+  {titanium_alloy, frame_material, graviton_lens, quantum_chip} -> vertical_launching_silo; // #building #bt3
+  sorter_mk1, sorter_mk2, sorter_mk3, mining_machine, advanced_mining_machine, water_pump, oil_extractor, oil_refinery, miniature_particle_collider, em_rail_ejector, vertical_launching_silo [color = blue]; // #building #bt2
+
+  // Make buildings in t4
+  {iron_ingot, gear, circuit_board} -> assembler_mk1; // #building #bt4
+  {assembler_mk1, graphene, processor} -> assembler_mk2; // #building #bt4
+  {assembler_mk2, particle_broadband, quantum_chip} -> assembler_mk3; // #building #bt4
+  {iron_ingot, stone_brick, circuit_board, magnetic_coil} -> arc_smelter; // #building #bt4
+  {arc_smelter, frame_material, plane_filter, unipolar_magnet} -> plane_smelter; // #building #bt4
+  {steel, plasma_exciter, circuit_board, microcrystalline_component} -> spray_coater; // #building #bt4
+  {steel, stone_brick, glass, processor} -> fractionator; // #building #bt4
+  {steel, stone_brick, glass, circuit_board} -> chemical_plant; // #buiding #bt4
+  {iron_ingot, glass, circuit_board, magnetic_coil} -> matrix_lab; // #building #bt4
+  {iron_ingot, super_magnetic_coil, crystal_silicon} -> accumulator; // #building #bt4
+  assembler_mk1, assembler_mk2, assembler_mk3, arc_smelter, plane_smelter, spray_coater, fractionator, chemical_plant, matrix_lab, accumulator [color = blue]; // #buiding #bt4
+
     </script>
     <script src="viz.js"></script>
     <script src="full.render.js"></script>
