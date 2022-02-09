@@ -24,6 +24,7 @@ function center() {
 function render() {
   if (svg) {
     svg.destroy();
+    svg = undefined;
   }
   const content = document.getElementById('raw_graphviz').innerText;
   const filterOut = document.getElementById('filter_out').value;
